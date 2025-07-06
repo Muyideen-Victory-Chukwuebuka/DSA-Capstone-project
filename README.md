@@ -32,5 +32,43 @@ I the initial phase of the data cleaning and preparation, I performed the follow
     ### Data Analysis
     This is where I included some basic lines of code or queries or even some of the Dax expressions used during the analysis
 
-  - - - SQL
-      - 
+    ```   SQL
+    
+create database KMS
+
+select * from kms
+
+select
+[product_category], 
+count (distinct customer_name) as Totalpurchase 
+from KMS
+group by [product_category]
+order by Totalpurchase desc
+
+Select 
+customer_name,
+sum(order_quantity)as totalsales
+from kms
+group by customer_name
+order by totalsales desc
+
+select 
+customer_name, 
+product_category, 
+product_name,
+sum(order_quantity) as total_quantity,
+sum(sales) as total_sales,
+sum(Profit) as total_Profit
+from kms
+where Customer_Name in (select Customer_Name
+from kms
+group by Customer_Name)
+group by 
+Customer_Name,
+Product_Category,
+Product_Name
+order by
+Customer_Name, 
+total_sales desc 
+
+```
